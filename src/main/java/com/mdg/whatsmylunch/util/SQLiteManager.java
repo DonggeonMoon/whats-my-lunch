@@ -23,6 +23,20 @@ public class SQLiteManager {
         return connection;
     }
 
+    public static void createTableIfNotExists() {
+        Connection connection = getConnection();
+        try (connection) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                "create table if not exists restaurant_list("
+                    + "id INTEGER primary key autoincrement, "
+                    + "name varchar(400))"
+            );
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static List<Restaurant> selectRestaurants() {
         Connection connection = getConnection();
 
