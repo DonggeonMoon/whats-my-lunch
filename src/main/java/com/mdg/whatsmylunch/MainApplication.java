@@ -4,7 +4,6 @@ import static javafx.geometry.Pos.*;
 
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import com.mdg.whatsmylunch.domain.Restaurant;
 import com.mdg.whatsmylunch.util.SQLiteManager;
@@ -64,7 +63,7 @@ public class MainApplication extends Application {
                         return;
                     }
 
-                    SQLiteManager.deleteRestaurant(tableView.getFocusModel().getFocusedItem().getId());
+                    SQLiteManager.deleteRestaurant(tableView.getFocusModel().getFocusedItem().id());
                     refreshRestaurantList();
                     tableView.getItems().setAll(restaurants);
                     tableView.refresh();
@@ -72,7 +71,7 @@ public class MainApplication extends Application {
             });
         });
         finalButton.setOnMouseClicked(event -> {
-            Alert alert = new Alert(Alert.AlertType.NONE, pickRandomRestaurant().getName(), ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.NONE, pickRandomRestaurant().name(), ButtonType.OK);
             alert.showAndWait();
         });
     }
@@ -109,7 +108,7 @@ public class MainApplication extends Application {
         return restaurants.stream()
             .skip(random.nextInt(restaurants.size()))
             .limit(1)
-            .collect(Collectors.toList()).get(0);
+            .toList().get(0);
     }
 
     public static void main(String[] args) {
